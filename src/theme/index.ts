@@ -3,14 +3,17 @@ import { createTheme } from "@mui/material";
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "#ff4500",
+      main: "#f4f2ff",
     },
     secondary: {
-      main: "#ffffff",
+      main: "#4B0082",
     },
     text: {
       primary: "#ff4500",
       secondary: "#ffd700",
     },
+  },
+  typography: {
+    fontFamily: "'Luckiest Guy', cursive",
   },
 });
