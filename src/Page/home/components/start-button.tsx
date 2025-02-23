@@ -1,7 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import FlyMoney from "../../../assets/moneyWing.webp";
-
+import "../style.css"
 const StartButton = () => {
   const [rotate, setRotate] = useState(false);
 
@@ -14,7 +14,6 @@ const StartButton = () => {
     <>
       <Stack
         sx={{
-          marginTop: "-120px",
           width: "80px",
           height: "80px",
           borderRadius: "50%",
@@ -39,23 +38,7 @@ const StartButton = () => {
         >
           Let's Start
         </Typography>
-      </Stack>
-
-      {/* Keyframe Animations */}
-      <style>
-        {`
-          @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0); }
-          }
-
-          @keyframes rotateCoin {
-            0% { transform: rotateY(0deg); }
-            100% { transform: rotateY(1080deg); } /* 3 x 360° */
-          }
-        `}
-      </style>
+      </Stack>      
     </>
   );
 };

@@ -1,6 +1,8 @@
 import { Stack, Typography } from "@mui/material";
+import { useMobileView } from "../../../common/hook/responsie-hook";
 
 const HowItWork = () => {
+  const isMobileView = useMobileView();
   const Steps = [
     {
       step: "Step 1",
@@ -21,7 +23,7 @@ const HowItWork = () => {
       {/* Title */}
       <Typography
         bgcolor={"secondary.main"}
-        variant="h2"
+        variant={isMobileView ? "h4" : "h2"}
         color="primary.main"
         textAlign={"center"}
         p={2}
@@ -35,13 +37,15 @@ const HowItWork = () => {
         flexWrap={"wrap"}
         gap={5}
         mt={5}
+        px={2}
       >
         {Steps.map((data, index) => (
           <Stack
             key={index}
             bgcolor={"primary.main"}
             p={3}
-            width={"320px"}
+            px={2}
+            width={isMobileView?'90%':'50%'}
             borderRadius={2}
             boxShadow={3}
             textAlign="center"
@@ -55,8 +59,6 @@ const HowItWork = () => {
           </Stack>
         ))}
       </Stack>
-
-      
     </Stack>
   );
 };

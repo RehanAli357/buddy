@@ -3,8 +3,8 @@ import BgImage from "../../assets/bgImage.webp";
 
 export const HomePageStyle = styled(Stack)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
-  flexDirection: "row",
-  justifyContent: "space-between",
+  flexDirection: "column",
+  justifyContent: "center",
   alignItems: "center",
   backgroundImage: `url(${BgImage})`,
   objectFit: "contain",
@@ -12,6 +12,7 @@ export const HomePageStyle = styled(Stack)(({ theme }) => ({
   backgroundSize: "140px",
   border: "10px solid black",
   borderRadius: "40px",
-  marginTop: 20,
-  marginBottom: 20,
+ margin:'30px',
+ paddingBottom:theme.spacing(2)
+  
 }));

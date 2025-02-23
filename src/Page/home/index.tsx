@@ -12,8 +12,8 @@ const HomePage = () => {
     <Stack alignItems={"center"} width={"100%"}>
       <HomePageStyle>
         <HomeBanner />
-      </HomePageStyle>
       <StartButton/>
+      </HomePageStyle>
     </Stack>
     <Features/>
     <HowItWork/>
