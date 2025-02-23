@@ -1,15 +1,18 @@
 import { ThemeProvider } from "@mui/material";
-import { theme } from "../theme";
 import TopBar from "./components/top-bar";
 import Footer from "./components/footer";
 import { Outlet } from "react-router-dom";
+import { theme } from "../theme/index";
+import { DialogProvider } from "../common/components/dialog/dialog-provider-conext";
 
 const BaseLayout: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
-      <TopBar />
-      <Outlet />
-      <Footer />
+      <DialogProvider key={'Dialog Provider'} >
+        <TopBar />
+        <Outlet />
+        <Footer />
+      </DialogProvider>
     </ThemeProvider>
   );
 };
