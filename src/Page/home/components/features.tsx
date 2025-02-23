@@ -2,6 +2,7 @@ import { Stack, Typography } from "@mui/material";
 import FindImg from "../../../assets/findImg.webp";
 import SaveImg from "../../../assets/SaveImg.webp";
 import GrowImg from "../../../assets/chart.webp";
+import {  useTabMobileView } from "../../../common/hook/responsie-hook";
 
 const featuresData = [
   {
@@ -25,9 +26,10 @@ const featuresData = [
 ];
 
 const Features = () => {
+  const isBigTabView = useTabMobileView()
   return (
     <Stack
-      mt={15}
+      mt={isBigTabView?10:15}
       flexWrap="wrap"
       alignItems="center"
       flexDirection="row"
@@ -43,12 +45,13 @@ const Features = () => {
           padding={2}
           borderRadius={2}
           boxShadow={3}
+          minHeight={400}
         >
           <img src={feature.img} alt={`${feature.title}-icon`} width={150} />
           <Typography textAlign="center" variant="h4" fontWeight="bold" mt={1} color="text.secondary">
             {feature.title}
           </Typography>
-          <Typography textAlign="center" mt={1} color="secondary.main">
+          <Typography textAlign="center" variant="h6" mt={1} color="secondary.main">
             {feature.description}
           </Typography>
         </Stack>

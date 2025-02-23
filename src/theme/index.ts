@@ -1,6 +1,6 @@
 import { createTheme } from "@mui/material";
 
-export const theme = createTheme({
+const theme = createTheme({
   palette: {
     primary: {
       main: "#f4f2ff",
@@ -17,3 +17,6 @@ export const theme = createTheme({
     fontFamily: "'Luckiest Guy', cursive",
   },
 });
+
+export default theme;
+export type Theme = typeof theme;
