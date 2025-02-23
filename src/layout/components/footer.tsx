@@ -1,4 +1,5 @@
 import { Stack, Typography, Divider } from "@mui/material";
+import Logo from "../../common/logo";
 
 const Footer = () => {
   return (
@@ -9,7 +10,7 @@ const Footer = () => {
         textAlign="center"
         spacing={3}
       >
-        <Stack>
+        <Stack alignItems={"center"}>
           <Typography variant="h6" color="text.secondary" fontWeight="bold">
             About Us
           </Typography>
@@ -17,18 +18,27 @@ const Footer = () => {
             Our platform helps you track, save, and grow your finances
             effectively.
           </Typography>
+          <Stack width={"fit-content"}>
+          <Logo/>
+          </Stack>
         </Stack>
 
         <Stack>
           <Typography variant="h6" color="text.secondary" fontWeight="bold">
             Quick Links
           </Typography>
-          <Typography fontFamily={'cursive'} variant="body2" mt={1}>
+          <Typography fontFamily={"cursive"} variant="body2" mt={1}>
             Home
           </Typography>
-          <Typography fontFamily={'cursive'} variant="body2">Features</Typography>
-          <Typography fontFamily={'cursive'} variant="body2">How It Works</Typography>
-          <Typography fontFamily={'cursive'} variant="body2">Testimonials</Typography>
+          <Typography fontFamily={"cursive"} variant="body2">
+            Features
+          </Typography>
+          <Typography fontFamily={"cursive"} variant="body2">
+            How It Works
+          </Typography>
+          <Typography fontFamily={"cursive"} variant="body2">
+            Testimonials
+          </Typography>
         </Stack>
 
         {/* Contact Section */}

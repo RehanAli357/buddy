@@ -1,11 +1,12 @@
 import { Button, Stack } from "@mui/material";
-import { LogoTextStyle, TopBarStyle } from "./style/top-bar.styled";
+import {  TopBarStyle } from "./style/top-bar.styled";
+import Logo from "../../common/logo";
 
 const TopBar = () => {
   return (
     <TopBarStyle>
       <Stack>
-       <LogoTextStyle>Buddy</LogoTextStyle>
+       <Logo/>
       </Stack>
       <Stack>
         <Button variant="contained" sx={{color:'secondary.main'}}>Signup</Button>
