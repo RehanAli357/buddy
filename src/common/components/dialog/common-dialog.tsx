@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import React, { ReactNode } from "react";
 import CloseIcon from "@mui/icons-material/Close";
+import { useMobileView } from "../../hook/responsie-hook";
 
 interface CommonDialogProps {
   title: string;
@@ -22,9 +23,25 @@ const CommonDialog: React.FC<CommonDialogProps> = ({
   open,
   onClose,
 }) => {
+  const isMobileView = useMobileView();
   return (
-    <Dialog open={open} onClose={onClose} fullWidth>
-      <Stack bgcolor={'primary.main'}>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      fullWidth
+      fullScreen={isMobileView}
+      sx={
+        isMobileView
+          ? {
+              "& .MuiDialog-paper": {
+                height: "100%",
+                backgroundColor: "primary.main",
+              },
+            }
+          : {}
+      }
+    >
+      <Stack bgcolor={"primary.main"}>
         <DialogTitle>
           <Stack
             flexDirection={"row"}
@@ -32,7 +49,14 @@ const CommonDialog: React.FC<CommonDialogProps> = ({
             justifyContent={"center"}
           >
             <Stack flex={1} alignItems={"center"}>
-              <Typography color="secondary.main" variant="h5">{title}</Typography>
+              <Typography
+                textAlign={"center"}
+                ml={5}
+                color="secondary.main"
+                variant="h5"
+              >
+                {title}
+              </Typography>
             </Stack>
             <IconButton onClick={onClose}>
               <CloseIcon sx={{ color: "secondary.main" }} />
