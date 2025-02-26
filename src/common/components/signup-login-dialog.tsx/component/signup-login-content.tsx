@@ -18,76 +18,17 @@ const SignupLoginContent: React.FC<SignupLoginContentProps> = ({
           : "Hi, Welcome back"}
       </Typography>
       <Stack mt={2} gap={2} width={"100%"}>
-        <TextField
-          required
-          label="Username"
-          sx={{
-            "& .MuiOutlinedInput-root": {
-              "&.Mui-focused": {
-                "& fieldset": { borderColor: "secondary.main" },
-                color: "secondary.main",
-              },
-            },
-            "& .MuiInputLabel-root": {
-              color: "text.primary",
-            },
-            "& .MuiInputLabel-root.Mui-focused": {
-              color: "text.secondary",
-            },
-          }}
-        />
-        <TextField
-          required
-          type="password"
-          label="Password"
-          sx={{
-            "& .MuiOutlinedInput-root": {
-              "&.Mui-focused": {
-                "& fieldset": { borderColor: "secondary.main" },
-                color: "secondary.main",
-              },
-            },
-            "& .MuiInputLabel-root": {
-              color: "text.primary",
-            },
-            "& .MuiInputLabel-root.Mui-focused": {
-              color: "text.secondary",
-            },
-          }}
-        />
+        <TextField required label="Username" />
+        <TextField required type="password" label="Password" />
         {isSignUp && (
-          <TextField
-            required
-            type="password"
-            label="Confirm Password"
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                "&.Mui-focused": {
-                  "& fieldset": { borderColor: "secondary.main" },
-                  color: "secondary.main",
-                },
-              },
-              "& .MuiInputLabel-root": {
-                color: "text.primary",
-              },
-              "& .MuiInputLabel-root.Mui-focused": {
-                color: "text.secondary",
-              },
-            }}
-          />
+          <TextField required type="password" label="Confirm Password" />
         )}
         {isSignUp && (
           <Stack flexDirection={"row"} alignItems="center" width={"100%"}>
-            <Checkbox
-              sx={{
-                color: "text.secondary",
-                "&.Mui-checked": {
-                  color: "secondary.main",
-                },
-              }}
-            />
+            <Checkbox />
             <Typography textAlign={"left"}>
-              By checking this, you accept our Terms and Conditions & Privacy Policy
+              By checking this, you accept our Terms and Conditions & Privacy
+              Policy
             </Typography>
           </Stack>
         )}
