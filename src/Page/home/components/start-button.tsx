@@ -1,13 +1,23 @@
 import { Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import FlyMoney from "../../../assets/moneyWing.webp";
-import "../style.css"
+import "../style.css";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../../../Routes/routes";
+const isUser=true
 const StartButton = () => {
   const [rotate, setRotate] = useState(false);
-
+  const navigate = useNavigate();
   const handleClick = () => {
     setRotate(true);
-    setTimeout(() => setRotate(false), 2000); // Reset after animation
+    setTimeout(() => {
+      setRotate(false);
+      if (isUser) {
+        navigate(ROUTES.ONBOARD);
+      } else {
+        navigate(ROUTES.HOME);
+      }
+    }, 2000);
   };
 
   return (
@@ -21,12 +31,14 @@ const StartButton = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
           boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
-          animation: rotate ? "rotateCoin 2s ease-in-out" : "float 2s ease-in-out infinite",
+          animation: rotate
+            ? "rotateCoin 2s ease-in-out"
+            : "float 2s ease-in-out infinite",
           cursor: "pointer",
         }}
         alignItems={"center"}
         justifyContent={"center"}
-        onClick={handleClick} 
+        onClick={handleClick}
       >
         <Typography
           sx={{
@@ -38,7 +50,7 @@ const StartButton = () => {
         >
           Let's Start
         </Typography>
-      </Stack>      
+      </Stack>
     </>
   );
 };

@@ -1,3 +1,5 @@
 export const ROUTES={
-    HOME:'/'
+    HOME:'/',
+    ONBOARD:'/onboard',
+    CREATE_PLAN:'/create-plan'
 }
