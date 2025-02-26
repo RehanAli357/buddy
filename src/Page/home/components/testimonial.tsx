@@ -22,7 +22,7 @@ const testimonials = [
 const Testimonial = () => {
   const isMobileView = useMobileView();
   return (
-    <Stack mt={10} alignItems="center">
+    <Stack my={10} alignItems="center">
       <Typography
         variant={isMobileView ? "h4" : "h2"}
         color="secondary.main"

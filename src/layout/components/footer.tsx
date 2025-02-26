@@ -3,7 +3,7 @@ import Logo from "../../common/logo";
 
 const Footer = () => {
   return (
-    <Stack bgcolor="secondary.main" color="white" py={4} px={2} mt={10}>
+    <Stack bgcolor="secondary.main" color="white" py={4} px={2}>
       <Stack
         direction={{ xs: "column", md: "row" }}
         justifyContent="space-around"
