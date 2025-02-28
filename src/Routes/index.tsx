@@ -4,6 +4,7 @@ import BaseLayout from "../layout/base-layout";
 import HomePage from "../Page/home";
 import OnBoardPage from "../Page/on-board";
 import CreatePlanPage from "../Page/create-plan";
+import ViewPlanPage from "../Page/view-plan";
 
 export const router = createBrowserRouter([
   {
@@ -12,16 +13,20 @@ export const router = createBrowserRouter([
     children: [
       {
         path: ROUTES.HOME,
-        element: <HomePage/>,
+        element: <HomePage />,
       },
       {
-        path:ROUTES.ONBOARD,
-        element:<OnBoardPage/>
+        path: ROUTES.ONBOARD,
+        element: <OnBoardPage />,
       },
       {
-        path:ROUTES.CREATE_PLAN,
-        element:<CreatePlanPage/>
-      }
+        path: ROUTES.CREATE_PLAN,
+        element: <CreatePlanPage />,
+      },
+      {
+        path: ROUTES.VIEW_PLAN,
+        element: <ViewPlanPage />,
+      },
     ],
   },
 ]);
