@@ -75,7 +75,7 @@ const Footer = () => {
 
       {/* Copyright */}
       <Typography variant="body2" textAlign="center" mt={2}>
-        © {new Date().getFullYear()} FinanceBuddy. All rights reserved.
+        © {new Date().getFullYear()} Buddy. All rights reserved.
       </Typography>
     </Stack>
   );
