@@ -1,4 +1,4 @@
-import { Stack,  } from "@mui/material";
+import { Stack  } from "@mui/material";
 import { HomePageStyle } from "./home-page.style";
 import HomeBanner from "./components/home-banner";
 import StartButton from "./components/start-button";
