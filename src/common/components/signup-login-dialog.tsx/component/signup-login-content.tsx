@@ -1,14 +1,16 @@
-import { Button, Checkbox, Stack, Typography } from "@mui/material";
-import TextField from "@mui/material/TextField";
-
+import { Stack, Typography } from "@mui/material";
+import SignupForm from "./form/signup-form";
+import LoginForm from "./form/login-form";
 interface SignupLoginContentProps {
   isSignUp: boolean;
   setIsSignUp: React.Dispatch<React.SetStateAction<boolean>>;
+  onClose: () => void;
 }
 
 const SignupLoginContent: React.FC<SignupLoginContentProps> = ({
   isSignUp,
   setIsSignUp,
+  onClose,
 }) => {
   return (
     <Stack alignItems={"center"}>
@@ -17,28 +19,11 @@ const SignupLoginContent: React.FC<SignupLoginContentProps> = ({
           ? "Hi There, Signup to start planning your savings"
           : "Hi, Welcome back"}
       </Typography>
-      <Stack mt={2} gap={2} width={"100%"}>
-        <TextField required label="Username" />
-        <TextField required type="password" label="Password" />
-        {isSignUp && (
-          <TextField required type="password" label="Confirm Password" />
-        )}
-        {isSignUp && (
-          <Stack flexDirection={"row"} alignItems="center" width={"100%"}>
-            <Checkbox />
-            <Typography textAlign={"left"}>
-              By checking this, you accept our Terms and Conditions & Privacy
-              Policy
-            </Typography>
-          </Stack>
-        )}
-        <Button
-          variant="contained"
-          sx={{ color: "primary.main", bgcolor: "secondary.main" }}
-        >
-          Submit
-        </Button>
-      </Stack>
+      {isSignUp ? (
+        <SignupForm onClose={onClose} />
+      ) : (
+        <LoginForm onClose={onClose} />
+      )}
       <Typography mt={1}>
         {isSignUp ? (
           <>
