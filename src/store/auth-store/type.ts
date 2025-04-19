@@ -7,4 +7,5 @@ export interface userAuth {
   userPurchaseType: "FREE" | "PREMIUM";
   authToken?: string;
   password?: string;
+  isLoggedIn?:boolean;
 }

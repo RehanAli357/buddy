@@ -10,7 +10,8 @@ interface UserDetails {
     lastName: string,
     email: string,
     userPurchaseType: "FREE" | "PREMIUM",
-    password: string
+    password: string,
+    isLoggedIn?:boolean,
   ) => void;
 }
 
