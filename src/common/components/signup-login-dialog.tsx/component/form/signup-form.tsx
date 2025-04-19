@@ -1,7 +1,5 @@
 import { Button, Checkbox, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../../../../../Routes/routes";
 import { useUserRegister } from "../../../../../apis/user-hook/query";
 import { z } from "zod";
 import { userRegisterSchema } from "./validator";
@@ -23,7 +21,6 @@ const SignupForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [termsAccepted, setTermsAccepted] = useState<boolean>(false);
 
   const [errors, setErrors] = useState<Partial<FormErrors>>({});
-  const navigate = useNavigate();
   const mutation = useUserRegister(user);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,7 +47,6 @@ const SignupForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       mutation.mutate();
       setErrors({});
       onClose();
-      navigate(ROUTES.ONBOARD)
     } catch (error) {
       if (error instanceof z.ZodError) {
         const fieldErrors = error.flatten().fieldErrors;
