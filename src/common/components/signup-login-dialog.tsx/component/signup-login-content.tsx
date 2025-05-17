@@ -20,7 +20,7 @@ const SignupLoginContent: React.FC<SignupLoginContentProps> = ({
           : "Hi, Welcome back"}
       </Typography>
       {isSignUp ? (
-        <SignupForm onClose={onClose} />
+        <SignupForm onClose={onClose} setIsSignUp={setIsSignUp}/>
       ) : (
         <LoginForm onClose={onClose} />
       )}

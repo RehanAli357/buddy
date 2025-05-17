@@ -1,21 +1,28 @@
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
+import { useLoginUser } from "../../../../../apis/user-hook/query";
+import { toast } from "react-toastify";
+import axios from "axios";
+import useAuthStore from "../../../../../store/auth-store/store";
 
 interface loginUser {
-  userName: string;
+  username: string;
   password: string;
 }
 
 const LoginForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [user, setUser] = useState<loginUser>({
-    userName: "",
+    username: "",
     password: "",
   });
 
-  const [errors, setErrors] = useState<{ userName: string; password: string }>({
-    userName: "",
+  const [errors, setErrors] = useState<{ username: string; password: string }>({
+    username: "",
     password: "",
   });
+
+  const mutation = useLoginUser(user);
+  const { addAuthToken } = useAuthStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -28,13 +35,13 @@ const LoginForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     e.preventDefault();
 
     let valid = true;
-    const newErrors = { userName: "", password: "" };
+    const newErrors = { username: "", password: "" };
 
-    if (!user.userName.trim()) {
-      newErrors.userName = "Username is required*";
+    if (!user.username.trim()) {
+      newErrors.username = "Username is required*";
       valid = false;
-    } else if (user.userName.length < 3) {
-      newErrors.userName = "Username must be at least 3 characters*";
+    } else if (user.username.length < 3) {
+      newErrors.username = "Username must be at least 3 characters*";
       valid = false;
     }
 
@@ -46,9 +53,23 @@ const LoginForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     setErrors(newErrors);
 
     if (valid) {
-      console.log("Logging in:", user);
-      // Perform login logic here (e.g., API call)
-      onClose()
+      mutation.mutate(undefined, {
+        onSuccess: (data) => {
+          toast("User Logged in Successfully", { type: "success" });
+          addAuthToken(data.token);
+        },
+        onError: (error) => {
+          if (axios.isAxiosError(error)) {
+            toast(error.response?.data?.message || "Unable to Register", {
+              type: "error",
+            });
+          } else {
+            toast("Unexpected error", { type: "error" });
+            console.error(error);
+          }
+        },
+      });
+      onClose();
     }
   };
 
@@ -59,19 +80,19 @@ const LoginForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           <Stack>
             <TextField
               required
-              label="Username"
-              name="userName"
-              value={user.userName}
+              label="username"
+              name="username"
+              value={user.username}
               onChange={handleChange}
             />
-            {errors.userName && (
+            {errors.username && (
               <Typography
                 fontFamily={"cursive"}
                 fontWeight={100}
                 color="error"
                 fontSize="0.8rem"
               >
-                {errors.userName}
+                {errors.username}
               </Typography>
             )}
           </Stack>
