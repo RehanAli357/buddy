@@ -42,7 +42,7 @@ const CommonDialog: React.FC<CommonDialogProps> = ({
       }
     >
       <Stack bgcolor={"primary.main"}>
-        <DialogTitle>
+        <DialogTitle sx={{paddingY:0}}>
           <Stack
             flexDirection={"row"}
             alignItems={"center"}
@@ -52,6 +52,7 @@ const CommonDialog: React.FC<CommonDialogProps> = ({
               <Typography
                 textAlign={"center"}
                 ml={5}
+                mt={0.5}
                 color="secondary.main"
                 variant="h5"
               >

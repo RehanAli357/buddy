@@ -4,8 +4,7 @@ export interface userAuth {
   firstName: string;
   lastName: string;
   email: string;
-  userPurchaseType: "FREE" | "PREMIUM";
-  authToken?: string;
+  usertype: "free" | "premium";
   password?: string;
-  isLoggedIn?:boolean;
+  isLoggedIn?: boolean;
 }

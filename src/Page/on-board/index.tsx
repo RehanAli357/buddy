@@ -15,10 +15,7 @@ import {
 import { useMobileView } from "../../common/hook/responsie-hook";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../Routes/routes";
-
-const user = {
-  name: "Rehan",
-};
+import useAuthStore from "../../store/auth-store/store";
 
 interface DataForm {
   income: string;
@@ -39,6 +36,9 @@ const OnBoardPage = () => {
     "Fixed Monthly Savings",
   ]);
 
+  const { getUser } = useAuthStore();
+
+  const user = getUser();
   const isMobileView = useMobileView();
   const navigate = useNavigate();
   const handleNext = () => {
@@ -124,7 +124,7 @@ const OnBoardPage = () => {
   ];
 
   return (
-    <Stack>
+    <Stack sx={{ minHeight: isMobileView ? "initial" : "80vh" }}>
       <Container maxWidth={isMobileView ? "sm" : "md"}>
         <Paper
           elevation={3}
@@ -146,7 +146,7 @@ const OnBoardPage = () => {
             fontWeight="bold"
             color="secondary"
           >
-            Welcome, {user.name}!
+            Welcome, {user?.userName}!
           </Typography>
           <Typography
             variant="h6"

@@ -5,11 +5,13 @@ import { z } from "zod";
 import { userRegisterSchema } from "./validator";
 import { isFormValid } from "./utils";
 import { FormErrors, UserDetails } from "./type";
+import { toast } from "react-toastify";
+import axios from "axios";
 
-
-
-
-const SignupForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+const SignupForm: React.FC<{
+  onClose: () => void;
+  setIsSignUp: React.Dispatch<React.SetStateAction<boolean>>;
+}> = ({ setIsSignUp }) => {
   const [user, setUser] = useState<UserDetails>({
     username: "",
     firstname: "",
@@ -44,9 +46,24 @@ const SignupForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         }));
         return;
       }
-      mutation.mutate();
+      mutation.mutate(undefined, {
+        onSuccess: () => {
+          toast("User Register Successfully", { type: "success" });
+          setIsSignUp(false);
+        },
+        onError: (error) => {
+          if (axios.isAxiosError(error)) {
+            toast(error.response?.data?.message || "Unable to Register", {
+              type: "error",
+            });
+
+          } else {
+            toast("Unexpected error", { type: "error" });
+            console.error(error);
+          }
+        },
+      });
       setErrors({});
-      onClose();
     } catch (error) {
       if (error instanceof z.ZodError) {
         const fieldErrors = error.flatten().fieldErrors;
@@ -56,129 +73,131 @@ const SignupForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Stack mt={2} gap={2} width={"100%"}>
-        <Stack>
-          <TextField
-            required
-            label="user Name"
-            name="username"
-            value={user.username}
-            onChange={handleChange}
-          />
-          {errors.username && (
+    <>
+      <form onSubmit={handleSubmit}>
+        <Stack mt={2} gap={2} width={"100%"}>
+          <Stack>
+            <TextField
+              required
+              label="user Name"
+              name="username"
+              value={user.username}
+              onChange={handleChange}
+            />
+            {errors.username && (
+              <Typography fontWeight={100} color="error" fontSize="0.8rem">
+                {errors.username}
+              </Typography>
+            )}
+          </Stack>
+
+          <Stack>
+            <TextField
+              required
+              label="First Name"
+              name="firstname"
+              value={user.firstname}
+              onChange={handleChange}
+            />
+            {errors.firstname && (
+              <Typography fontWeight={100} color="error" fontSize="0.8rem">
+                {errors.firstname}
+              </Typography>
+            )}
+          </Stack>
+
+          <Stack>
+            <TextField
+              required
+              label="Last Name"
+              name="lastname"
+              value={user.lastname}
+              onChange={handleChange}
+            />
+            {errors.lastname && (
+              <Typography fontWeight={100} color="error" fontSize="0.8rem">
+                {errors.lastname}
+              </Typography>
+            )}
+          </Stack>
+
+          <Stack>
+            <TextField
+              required
+              label="Email"
+              name="email"
+              value={user.email}
+              onChange={handleChange}
+            />
+            {errors.email && (
+              <Typography fontWeight={100} color="error" fontSize="0.8rem">
+                {errors.email}
+              </Typography>
+            )}
+          </Stack>
+
+          <Stack>
+            <TextField
+              required
+              type="password"
+              label="Password"
+              name="password"
+              value={user.password}
+              onChange={handleChange}
+            />
+            {errors.password && (
+              <Typography fontWeight={100} color="error" fontSize="0.8rem">
+                {errors.password}
+              </Typography>
+            )}
+          </Stack>
+
+          <Stack>
+            <TextField
+              required
+              type="password"
+              label="Confirm Password"
+              name="confirmPassword"
+              value={user.confirmPassword}
+              onChange={handleChange}
+            />
+            {errors.confirmPassword && (
+              <Typography fontWeight={100} color="error" fontSize="0.8rem">
+                {errors.confirmPassword}
+              </Typography>
+            )}
+          </Stack>
+
+          <Stack flexDirection={"row"} alignItems="center" width={"100%"}>
+            <Checkbox
+              name="termsAccepted"
+              checked={termsAccepted}
+              onChange={() => {
+                setTermsAccepted(!termsAccepted);
+              }}
+            />
+            <Typography textAlign={"left"}>
+              By checking this, you accept our Terms and Conditions & Privacy
+              Policy
+            </Typography>
+          </Stack>
+          {termsAccepted && (
             <Typography fontWeight={100} color="error" fontSize="0.8rem">
-              {errors.username}
+              {termsAccepted}
             </Typography>
           )}
-        </Stack>
 
-        <Stack>
-          <TextField
-            required
-            label="First Name"
-            name="firstname"
-            value={user.firstname}
-            onChange={handleChange}
-          />
-          {errors.firstname && (
-            <Typography fontWeight={100} color="error" fontSize="0.8rem">
-              {errors.firstname}
-            </Typography>
-          )}
+          <Button
+            variant="contained"
+            type="submit"
+            disabled={!isFormValid(termsAccepted, user, errors)}
+            sx={{ color: "primary.main", bgcolor: "secondary.main" }}
+          >
+            Submit
+          </Button>
         </Stack>
-
-        <Stack>
-          <TextField
-            required
-            label="Last Name"
-            name="lastname"
-            value={user.lastname}
-            onChange={handleChange}
-          />
-          {errors.lastname && (
-            <Typography fontWeight={100} color="error" fontSize="0.8rem">
-              {errors.lastname}
-            </Typography>
-          )}
-        </Stack>
-
-        <Stack>
-          <TextField
-            required
-            label="Email"
-            name="email"
-            value={user.email}
-            onChange={handleChange}
-          />
-          {errors.email && (
-            <Typography fontWeight={100} color="error" fontSize="0.8rem">
-              {errors.email}
-            </Typography>
-          )}
-        </Stack>
-
-        <Stack>
-          <TextField
-            required
-            type="password"
-            label="Password"
-            name="password"
-            value={user.password}
-            onChange={handleChange}
-          />
-          {errors.password && (
-            <Typography fontWeight={100} color="error" fontSize="0.8rem">
-              {errors.password}
-            </Typography>
-          )}
-        </Stack>
-
-        <Stack>
-          <TextField
-            required
-            type="password"
-            label="Confirm Password"
-            name="confirmPassword"
-            value={user.confirmPassword}
-            onChange={handleChange}
-          />
-          {errors.confirmPassword && (
-            <Typography fontWeight={100} color="error" fontSize="0.8rem">
-              {errors.confirmPassword}
-            </Typography>
-          )}
-        </Stack>
-
-        <Stack flexDirection={"row"} alignItems="center" width={"100%"}>
-          <Checkbox
-            name="termsAccepted"
-            checked={termsAccepted}
-            onChange={() => {
-              setTermsAccepted(!termsAccepted);
-            }}
-          />
-          <Typography textAlign={"left"}>
-            By checking this, you accept our Terms and Conditions & Privacy
-            Policy
-          </Typography>
-        </Stack>
-        {termsAccepted && (
-          <Typography fontWeight={100} color="error" fontSize="0.8rem">
-            {termsAccepted}
-          </Typography>
-        )}
-
-        <Button
-          variant="contained"
-          type="submit"
-          disabled={!isFormValid(termsAccepted, user, errors)}
-          sx={{ color: "primary.main", bgcolor: "secondary.main" }}
-        >
-          Submit
-        </Button>
-      </Stack>
-    </form>
+      </form>
+    </>
   );
 };
 

@@ -4,15 +4,17 @@ import FlyMoney from "../../../assets/moneyWing.webp";
 import "../style.css";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../Routes/routes";
-const isUser=true
+import useAuthStore from "../../../store/auth-store/store";
 const StartButton = () => {
   const [rotate, setRotate] = useState(false);
+  const { getAuthToken } = useAuthStore();
+  const token = getAuthToken();
   const navigate = useNavigate();
   const handleClick = () => {
     setRotate(true);
     setTimeout(() => {
       setRotate(false);
-      if (isUser) {
+      if (token) {
         navigate(ROUTES.ONBOARD);
       } else {
         navigate(ROUTES.HOME);
